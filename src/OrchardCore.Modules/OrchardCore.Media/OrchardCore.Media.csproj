@@ -10,10 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="SixLabors.ImageSharp.Web" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ImageSharp.Web\ImageSharp.Web\ImageSharp.Web.csproj" />
     <ProjectReference Include="..\..\OrchardCore\OrchardCore.Apis.GraphQL.Abstractions\OrchardCore.Apis.GraphQL.Abstractions.csproj" />
     <ProjectReference Include="..\..\OrchardCore\OrchardCore.Deployment.Abstractions\OrchardCore.Deployment.Abstractions.csproj" />
     <ProjectReference Include="..\..\OrchardCore\OrchardCore.Module.Targets\OrchardCore.Module.Targets.csproj" />

@@ -164,7 +164,7 @@ namespace OrchardCore.Media
 
             .SetRequestParser<QueryCollectionRequestParser>()
             .SetMemoryAllocator<ArrayPoolMemoryAllocator>()
-            .SetCache<PhysicalFileSystemCache>()
+            .SetCache<TenantPhysicalFileSystemCache>()
             .SetCacheHash<CacheHash>()
             .AddProvider<MediaFileProvider>()
             .AddProcessor<ResizeWebProcessor>()

@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrchardCore.Modules.Cms", "OrchardCore.Modules.Cms", "{90030E85-0C4F-456F-B879-443E8A3F220D}"
 EndProject
@@ -367,7 +367,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.ResponseCompres
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Google", "src\OrchardCore.Modules\OrchardCore.Google\OrchardCore.Google.csproj", "{E7CB5F02-2E90-4ADD-A851-1C49CDA184D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.HealthChecks", "src\OrchardCore.Modules\OrchardCore.HealthChecks\OrchardCore.HealthChecks.csproj", "{76023624-8D28-4666-9CA6-5978ACC2571D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.HealthChecks", "src\OrchardCore.Modules\OrchardCore.HealthChecks\OrchardCore.HealthChecks.csproj", "{76023624-8D28-4666-9CA6-5978ACC2571D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImageSharp.Web", "ImageSharp.Web", "{5BBB16CF-D18E-4409-9F38-81D0C1C0E5A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageSharp.Web", "src\ImageSharp.Web\ImageSharp.Web\ImageSharp.Web.csproj", "{58D845AF-E31F-4828-B62B-AF6EB05FACE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -975,6 +979,10 @@ Global
 		{76023624-8D28-4666-9CA6-5978ACC2571D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76023624-8D28-4666-9CA6-5978ACC2571D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76023624-8D28-4666-9CA6-5978ACC2571D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D845AF-E31F-4828-B62B-AF6EB05FACE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D845AF-E31F-4828-B62B-AF6EB05FACE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D845AF-E31F-4828-B62B-AF6EB05FACE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D845AF-E31F-4828-B62B-AF6EB05FACE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1147,6 +1155,8 @@ Global
 		{C6EEBB52-183F-418F-A5C0-458D146C10A2} = {A066395F-6F73-45DC-B5A6-B4E306110DCE}
 		{E7CB5F02-2E90-4ADD-A851-1C49CDA184D6} = {A066395F-6F73-45DC-B5A6-B4E306110DCE}
 		{76023624-8D28-4666-9CA6-5978ACC2571D} = {A066395F-6F73-45DC-B5A6-B4E306110DCE}
+		{5BBB16CF-D18E-4409-9F38-81D0C1C0E5A5} = {275E087F-A4E2-4A7B-A924-ED68E3A52086}
+		{58D845AF-E31F-4828-B62B-AF6EB05FACE0} = {5BBB16CF-D18E-4409-9F38-81D0C1C0E5A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46A1D25A-78D1-4476-9CBF-25B75E296341}
