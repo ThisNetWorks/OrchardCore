@@ -1115,3 +1115,16 @@ ul.pager li a {
         }
     }
 }
+
+@include media-breakpoint-up(md) {
+    // Styles
+    .content-sidebar{
+        position:sticky;
+        top: 65px;
+    }
+}
+
+.no-padding{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
