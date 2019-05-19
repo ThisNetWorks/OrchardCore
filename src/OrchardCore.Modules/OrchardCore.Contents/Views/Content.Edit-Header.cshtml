@@ -1,0 +1,59 @@
+@*<p>I'm the content header</p>*@
+
+<div class="row">
+    <div class="col-12 col-xl-10">
+        <h1>@RenderTitleSegments(Model.Title)</h1>
+    </div>
+    <div class="col-xl-2 d-flex justify-content-end align-self-center">
+        @*<div class="sticky-top">*@
+        @*<div class="d-flex justify-content-end align-self-center">
+                @*style="width:30px; padding-left:15px" class="open"
+                <p>sticky</p>
+            </div>*@
+
+        <div class="position-fixed">
+            <button id="collapse-actions" class="sidebar-compactor open2" type="button" title="Collapse / expand menu"></button>
+        </div>
+        @*<div id="collapse-actions">
+                <i class="fas fa-angle-double-up"></i>
+            </div>*@
+        @*</div>*@
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-xl-10">
+        @Html.ValidationSummary()
+    </div>
+
+</div>
+<script type="text/javascript" at="Foot">
+    $(function () {
+        $('#collapse-actions').click(function () {
+            //var icon = $(this).find('svg').first();
+            if ($(this).hasClass('open2') === true) {
+                $('#edit-actions').addClass('d-none');
+                $('#actions-col').removeClass('col-xl-2');
+                $('#content-col').removeClass('col-xl-10');
+                $('#content-col').addClass('col-xl-12');
+                $('#content-col').addClass('pad-sidebar');
+                $(this).removeClass('open2');
+                $(this).addClass('closed2');
+                //$(icon).removeClass('fa-angle-double-up');
+                //$(icon).addClass('fa-angle-double-down');
+
+            } else {
+
+                $(this).removeClass('closed2');
+                $(this).addClass('open2');
+                //$(icon).removeClass('fa-angle-double-down');
+                //$(icon).addClass('fa-angle-double-up');
+                $('#edit-actions').removeClass('d-none');
+                $('#content-col').removeClass('col-xl-12');
+                $('#content-col').removeClass('pad-sidebar');
+                $('#actions-col').addClass('col-xl-2');
+                $('#content-col').addClass('col-xl-10');
+            }
+        });
+    });
+</script>
+

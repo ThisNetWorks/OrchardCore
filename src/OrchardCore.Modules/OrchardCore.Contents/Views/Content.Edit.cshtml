@@ -7,8 +7,14 @@
 <style asp-src="~/OrchardCore.Contents/Styles/Contents.min.css" debug-src="~/OrchardCore.Contents/Styles/Contents.css"></style>
 
 <div class="container-fluid no-padding">
+
+    @if (Model.Header != null)
+    {
+        @await DisplayAsync(Model.Header)
+    }
     <div class="row">
-        <div class="col-12 col-md-8 col-xl-10">
+        <div id="content-col" class="col-12 col-md-8 col-xl-10">
+
             <div class="edit-item-primary">
                 @if (Model.Content != null)
                 {
@@ -24,42 +30,49 @@
                 }
             </div>
         </div>
-        <div class="col-12 col-md-4 col-xl-2">
-            <div class="edit-item-secondary group content-sidebar">
-                <div id="ta-left-sideba">
-                    <div class="edit-item-actions form-group d-md-flex flex-md-column">
-                        @await DisplayAsync(Model.Actions)
+        <div id="actions-col" class="col-12 col-md-4 col-xl-2">
+            @*<div class="edit-item-secondary group content-sidebar">
+                <div id="ta-left-sideba">*@
+            @*<div class="d-md-flex justify-content-around">*@
+            <div class="sticky-top" style="top:149px">
+                <div id="edit-actions" class="edit-item-actions form-group d-md-flex flex-md-column w-100">
 
-                        @if (Model.Sidebar != null)
-                        {
-                            <p>I'm the sidebar bits</p>
-                            @*<div class="edit-sidebar-handler"></div>
-                <div class="edit-sidebar group">*@
-                            @await DisplayAsync(Model.Sidebar)
-                            @*</div>*@
-                        }
-                        @{
-                            var returnUrl = Context.Request.Query["returnUrl"];
-                        }
+                    @await DisplayAsync(Model.Actions)
 
-                        @if (!String.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        {
-                            <div class="btn-group">
-                                <a id="button-cancel" href="@returnUrl" class="btn btn-secondary">@T["Cancel"]</a>
-                            </div>
-                        }
-                    </div>
+                    @if (Model.Sidebar != null)
+                    {
+                        @*<p>I'm the sidebar bits</p>*@
+                        @*<div class="edit-sidebar-handler"></div>
+                            <div class="edit-sidebar group">*@
+                        @await DisplayAsync(Model.Sidebar)
+                        @*</div>*@
+                    }
+                    @{
+                        var returnUrl = Context.Request.Query["returnUrl"];
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        <div class="btn-group">
+                            <a id="button-cancel" href="@returnUrl" class="btn btn-secondary">@T["Cancel"]</a>
+                        </div>
+                    }
                 </div>
             </div>
+
+            @*</div>*@
+            @*</div>
+                </div>*@
         </div>
+    
     </div>
-@*@if (Model.Sidebar != null)
-{
-    <div class="edit-sidebar-handler"></div>
-    <div class="edit-sidebar group">
-        @await DisplayAsync(Model.Sidebar)
-    </div>
-}*@
+    @*@if (Model.Sidebar != null)
+        {
+            <div class="edit-sidebar-handler"></div>
+            <div class="edit-sidebar group">
+                @await DisplayAsync(Model.Sidebar)
+            </div>
+        }*@
 </div>
 
 @if (!String.IsNullOrWhiteSpace(Context.Request.Query["returnUrl"]))
