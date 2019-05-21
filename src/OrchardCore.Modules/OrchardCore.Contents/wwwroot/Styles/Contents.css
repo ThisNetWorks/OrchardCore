@@ -5,6 +5,10 @@
 
 .btn-group {
   padding-bottom: 5px; }
+  .btn-group a,
+  .btn-group button:not(.dropdown-toggle) {
+    display: inline-flex;
+    width: 100%; }
 
 .edit-container {
   display: table;

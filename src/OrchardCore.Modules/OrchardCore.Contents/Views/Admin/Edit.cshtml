@@ -8,27 +8,24 @@
     ContentItem contentItem = Model.ContentItem;
     var contentTypeDefinition = ContentDefinitionManager.GetTypeDefinition(contentItem.ContentType);
     var typeDisplayName = contentTypeDefinition?.DisplayName ?? contentItem.ContentType.CamelFriendly();
+    Model.Header.Add(await New.Content_Edit__Header(Action: "Edit", TypeDisplayName: typeDisplayName));
 }
 
-<div class="container-fluid no-padding">
+@*<div class="container-fluid no-padding">
     <div class="row">
         <div class="col-12 col-md-8 col-xl-10">
             <h1>@RenderTitleSegments(T["Edit {0}", Html.Raw(typeDisplayName)])</h1>
-            @Model.Sidebar.Add(await New.Content_SaveDraftButton()))
-            @*<zone name="/Sidebar">
-                @await DisplayAsync(await New.Content_SaveDraftButton())
-            </zone>*@
         </div>
     </div>
-</div>
+</div>*@
 <form asp-action="Edit" asp-route-contentitemid="@contentItem.ContentItemId" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post" enctype="multipart/form-data">
-    <div class="container-fluid no-padding">
+    @*<div class="container-fluid no-padding">
         <div class="row">
             <div class="col-12 col-md-8 col-xl-10">
                 @Html.ValidationSummary()
 
             </div>
         </div>
-    </div>
+    </div>*@
     @await DisplayAsync(Model)
 </form>

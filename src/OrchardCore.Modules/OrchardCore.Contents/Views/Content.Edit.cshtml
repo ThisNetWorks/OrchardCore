@@ -8,7 +8,8 @@
 
 <div class="container-fluid no-padding">
     <div class="row">
-        <div class="col-12 col-md-8 col-xl-10">
+        <div class="col-12 col-md-8 col-lg-10">
+
             <div class="edit-item-primary">
                 @if (Model.Content != null)
                 {
@@ -24,17 +25,22 @@
                 }
             </div>
         </div>
-        <div class="col-12 col-md-4 col-xl-2">
+        <div class="col-12 col-md-4 col-lg-2">
             <div class="edit-item-secondary group content-sidebar">
-                <div id="ta-left-sideba">
                     <div class="edit-item-actions form-group d-md-flex flex-md-column">
+                        @*<div class="edit-item-header">*@
+                            @if (Model.Header != null)
+                            {
+                                @await DisplayAsync(Model.Header)
+                            }
+                        @*</div>*@
                         @await DisplayAsync(Model.Actions)
 
                         @if (Model.Sidebar != null)
                         {
                             <p>I'm the sidebar bits</p>
                             @*<div class="edit-sidebar-handler"></div>
-                <div class="edit-sidebar group">*@
+            <div class="edit-sidebar group">*@
                             @await DisplayAsync(Model.Sidebar)
                             @*</div>*@
                         }
