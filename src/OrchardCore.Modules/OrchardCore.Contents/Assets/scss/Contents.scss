@@ -4,8 +4,13 @@
 
 .btn-group {
   padding-bottom: 5px;
+  //   a {
+  //     display: inline-flex;
+  //     width: 100%;
+  //   }
+
   a,
-  button:not(.dropdown-toggle) {
+  button:first-of-type {
     display: inline-flex;
     width: 100%;
   }

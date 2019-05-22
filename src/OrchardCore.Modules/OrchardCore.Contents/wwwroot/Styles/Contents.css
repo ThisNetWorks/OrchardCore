@@ -6,7 +6,7 @@
 .btn-group {
   padding-bottom: 5px; }
   .btn-group a,
-  .btn-group button:not(.dropdown-toggle) {
+  .btn-group button:first-of-type {
     display: inline-flex;
     width: 100%; }
 
