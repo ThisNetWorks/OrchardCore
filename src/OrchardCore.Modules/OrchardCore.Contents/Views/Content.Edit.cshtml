@@ -14,12 +14,16 @@
     var typeDisplayName = contentTypeDefinition?.DisplayName ?? contentItem.ContentType.CamelFriendly();
 }
 <style asp-src="~/OrchardCore.Contents/Styles/Contents.min.css" debug-src="~/OrchardCore.Contents/Styles/Contents.css"></style>
-<script asp-src="~/OrchardCore.Resources/Scripts/bootstrap.min.js"  at="Foot"></script>
+
 <div class="container-fluid no-padding">
     <div class="row">
         <div class="col-12 col-md-8 col-lg-10">
 
             <div class="edit-item-primary">
+                @if (Model.Header != null)
+                {
+                    @await DisplayAsync(Model.Header)
+                }
                 @if (Model.Content != null)
                 {
                     <div class="edit-item-content">
@@ -34,16 +38,14 @@
                 }
             </div>
         </div>
-        <div class="col-12 col-md-4 col-lg-2">
+        <div class="col-12 col-md-4 col-lg-2" style="border-left: 1px solid rgba(0, 0, 0, 0.125);
+    margin-top: -15px;">
             <div class="edit-item-secondary group content-sidebar">
-                <div class="d-md-flex flex-md-column" style="min-height: 100vh">
+                <div class="d-md-flex flex-md-column" >
                     @*-65 for header*@
-                <div class="edit-item-actions form-group d-md-flex flex-md-column">
+                <div class="edit-item-actions form-group d-md-flex flex-md-column" style="min-height: 50vh">
                     @*<div class="edit-item-header">*@
-                    @if (Model.Header != null)
-                    {
-                        @await DisplayAsync(Model.Header)
-                    }
+      
                     @*</div>*@
                     @await DisplayAsync(Model.Actions)
 
@@ -59,55 +61,102 @@
                     }
                 </div>
 
-                <div class="edit-item-sidebar form-group ">
-                    <div id="accordian">
-                        <div class="card">
-                            <div class="card-header">
+                <div class="edit-item-sidebar d-md-flex justify-content-end flex-column" style="min-height: 42vh">
+                    <div class="card" style="border:none">
+                        <div class="meta-body card-body">
+                            <div class="meta-content d-md-flex justify-content-center">
                                 <span class="badge badge-success" title="@T["Published"]">
                                     <i class="fa fa-check" aria-hidden="true"></i> @T["Published"]
                                 </span>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" >
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseDates">
-                                <span class="hint">PublishedUtc</span>
-                                </button> 
-                                <p>@contentItem.PublishedUtc.GetValueOrDefault()</p>
+                            <div class="meta-content">
+                                <span class="meta-title">Content Type</span>
+                                <span class="meta-detail">@typeDisplayName</span>
                             </div>
-                            <div id="collapseDates" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
+                            <div class="meta-content">
+                                <span class="meta-title">Published Date</span>
+                                <span class="meta-detail">@contentItem.PublishedUtc.GetValueOrDefault()</span>
+                            </div>
+                            <div class="meta-content">
+                                <span class="meta-title">Created Date</span>
+                                <span class="meta-detail">@contentItem.CreatedUtc.GetValueOrDefault()</span>
+                            </div>
+                            <div class="meta-content">
+                                <span class="meta-title">Modified Date</span>
+                                <span class="meta-detail">@contentItem.ModifiedUtc.GetValueOrDefault()</span>
+                            </div>
 
-                                    <span class="hint">
-                                        Created Date
-                                    </span>
-                                    <p>@contentItem.CreatedUtc.GetValueOrDefault()</p>
-                                    <span class="hint">
-                                        Modified Date
-                                    </span>
-                                    <p>@contentItem.ModifiedUtc.GetValueOrDefault()</p>
-                                </div>
+
+                            <div class="meta-content">
+                                <span class="meta-title">Owned By</span>
+                                <span class="meta-detail">@contentItem.Owner</span>
+                            </div>
+                            <div class="meta-content">
+                                <span class="meta-title">Last Modified By</span>
+                                <span class="meta-detail">@contentItem.Author</span>
                             </div>
                         </div>
-                        @*<p>Author</p>
-                            <p>@contentItem.Author</p>
-                            <p>Owner</p>
-                            <p>@contentItem.Owner</p>
-                            <p>Content Type</p>
-                            <p>A thing</p>
-                            <p>Id</p>
-                            <p>@contentItem.ContentItemId</p>
-                            <p>Route</p>
-                            <p>/somewhere</p>*@
-                        @if (Model.Sidebar != null)
-                        {
-                            <p>I'm the sidebar bits</p>
-                            @*<div class="edit-sidebar-handler"></div>
-                                <div class="edit-sidebar group">*@
-                            @await DisplayAsync(Model.Sidebar)
-                            @*</div>*@
-                        }
                     </div>
+                    @*<div class="card">
+        <div class="card-header">
+            <span class="badge badge-success" title="@T["Published"]">
+                <i class="fa fa-check" aria-hidden="true"></i> @T["Published"]
+            </span>
+        </div>@Html.Raw($"<button class=\"btn-nostyle\"><span class=\"collapse-icon\"><i class=\"fas fa-chevron-{(Orchard.CultureDir()= ="ltr" ? "right" : "left" )} fa-xs chevron\"></i></span></button>")
+                    </div>*@
+                    @*<div id="accordian">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <label class=" collapsed" data-toggle="collapse" data-target="#collapseDates">
+                                <span class="hint">PublishedUtc</span>
+                                <i class="@($"fas fa-chevron-{(Orchard.CultureDir() == "ltr" ? "right" : "left")} fa-xs chevron")"></i>
+
+                            </label>
+                            <span class="title">@contentItem.PublishedUtc.GetValueOrDefault()</span>
+                        </div>
+                        <div id="collapseDates" class="collapse" data-parent="#accordian">
+                            <div class="card-body">
+
+                                <span class="hint">
+                                    Created Date
+                                </span>
+                                <p>@contentItem.CreatedUtc.GetValueOrDefault()</p>
+                                <span class="hint">
+                                    Modified Date
+                                </span>
+                                <p>@contentItem.ModifiedUtc.GetValueOrDefault()</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <label class=" collapsed" data-toggle="collapse" data-target="#owner">
+                                <span class="hint">Owner</span>
+                                <i class="@($"fas fa-chevron-{(Orchard.CultureDir() == "ltr" ? "right" : "left")} fa-xs chevron")"></i>
+                            </label>
+                            <p>@contentItem.Owner</p>
+                        </div>
+                        <div id="owner" class="collapse" data-parent="#accordian">
+                            <div class="card-body">
+
+                                <span class="hint">
+                                    Author
+                                </span>
+                                <p>@contentItem.Owner</p>
+                            </div>
+                        </div>
+                    </div>
+                    @*
+        <p>Content Type</p>
+        <p>A thing</p>
+        <p>Id</p>
+        <p>@contentItem.ContentItemId</p>
+        <p>Route</p>
+        <p>/somewhere</p>
+                </div>*@
+
+              
                 </div>
             </div>
         </div>

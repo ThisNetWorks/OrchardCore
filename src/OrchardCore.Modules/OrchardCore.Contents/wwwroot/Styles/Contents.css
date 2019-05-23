@@ -3,12 +3,33 @@
 ** Any changes made directly to this file will be overwritten next time its asset group is processed by Gulp.
 */
 
-.btn-group {
+.edit-item-actions .btn-group {
   padding-bottom: 5px; }
-  .btn-group a,
-  .btn-group button:first-of-type {
+  .edit-item-actions .btn-group a,
+  .edit-item-actions .btn-group button:first-of-type {
     display: inline-flex;
     width: 100%; }
+
+.meta-body {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important; }
+
+.meta-content {
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
+.meta-detail {
+  color: #495057;
+  font-size: 14px;
+  display: block; }
+
+.meta-title {
+  color: #6c757d !important;
+  font-weight: 400;
+  font-size: 80%;
+  display: block; }
 
 .edit-container {
   display: table;
@@ -45,7 +66,7 @@
 @media (min-width: 768px) {
   .content-sidebar {
     position: sticky;
-    top: 65px; } }
+    top: 72px; } }
 
 .no-padding {
   padding-left: 0px !important;

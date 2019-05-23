@@ -8,7 +8,8 @@
     ContentItem contentItem = Model.ContentItem;
     var contentTypeDefinition = ContentDefinitionManager.GetTypeDefinition(contentItem.ContentType);
     var typeDisplayName = contentTypeDefinition?.DisplayName ?? contentItem.ContentType.CamelFriendly();
-    Model.Header.Add(await New.Content_Edit__Header(Action: "Edit", TypeDisplayName: typeDisplayName));
+    //Model.Header.Add(await New.Content_Edit__Header(Action: "Edit", TypeDisplayName: typeDisplayName));
+    Model.Header.Add(await New.Content_Edit__Header(Title: T["Edit {0}", Html.Raw(typeDisplayName)]));
 }
 
 @*<div class="container-fluid no-padding">
