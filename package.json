@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "orchardcore.apis.graphql": "file:src/OrchardCore.Modules/OrchardCore.Apis.GraphQL",
+    "orchardcore.media": "file:src/OrchardCore.Modules/OrchardCore.Media",
     "orchardcore.resources": "file:src/OrchardCore.Modules/OrchardCore.Resources",
     "orchardcore.setup": "file:src/OrchardCore.Modules/OrchardCore.Setup",
     "orchardcore.theadmin": "file:src/OrchardCore.Themes/TheAdmin",
