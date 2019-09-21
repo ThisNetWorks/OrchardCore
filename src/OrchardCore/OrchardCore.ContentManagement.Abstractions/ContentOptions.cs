@@ -16,6 +16,14 @@ namespace OrchardCore.ContentManagement
             return AddContentPart(typeof(T));
         }
 
+        public ContentPartOption AddContentPart<T>(Action<ContentPartOption> action) where T : ContentPart
+        {
+            var option = new ContentPartOption(typeof(T));
+            action(option);
+            _contentParts.Add(option);
+            return option;
+        }
+
         public ContentPartOption AddContentPart(Type contentPartType)
         {
             if (!contentPartType.IsSubclassOf(typeof(ContentPart)))

@@ -15,5 +15,9 @@ namespace OrchardCore.ContentManagement
         }
 
         public Type Type { get; }
+
+        public Func<IServiceProvider, object> DisplayDriver { get; private set; }
+
+        public void WithDisplayDriver(Func<IServiceProvider, object> func) => DisplayDriver = func;
     }
 }

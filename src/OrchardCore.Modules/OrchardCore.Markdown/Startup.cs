@@ -30,8 +30,19 @@ namespace OrchardCore.Markdown
         public override void ConfigureServices(IServiceCollection services)
         {
             // Markdown Part
-            services.AddContentPart<MarkdownBodyPart>();
-            services.AddScoped<IContentPartDisplayDriver, MarkdownBodyPartDisplay>();
+            //services.AddContentPart<MarkdownBodyPart>();
+
+            // This should register it as well, which is why we need the Builder class.
+            services.AddContentPart<MarkdownBodyPart>(o =>
+            {
+                o.WithDisplayDriver<MarkdownBodyPartDisplay>();
+            });
+
+            // not required, but still need it for edit etc.
+            services.AddScoped<MarkdownBodyPartDisplay>();
+            services.AddScoped<IContentPartDisplayDriver>(sp => sp.GetRequiredService<MarkdownBodyPartDisplay>());
+            //services.AddScoped<IContentPartDisplayDriver, MarkdownBodyPartDisplay>();
+
             services.AddScoped<IContentTypePartDefinitionDisplayDriver, MarkdownBodyPartSettingsDisplayDriver>();
             services.AddScoped<IDataMigration, Migrations>();
             services.AddScoped<IContentPartIndexHandler, MarkdownBodyPartIndexHandler>();

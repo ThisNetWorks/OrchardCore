@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace OrchardCore.ContentManagement
@@ -13,6 +14,12 @@ namespace OrchardCore.ContentManagement
             return serviceCollection.Configure<ContentOptions>(o => o.AddContentPart<TContentPart>());
         }
 
+        public static IServiceCollection AddContentPart<TContentPart>(this IServiceCollection serviceCollection, Action<ContentPartOption> action)
+        where TContentPart : ContentPart
+        {
+            return serviceCollection.Configure<ContentOptions>(o => o.AddContentPart<TContentPart>(action));
+        }
+
         /// <summary>
         /// Registers a content field type.
         /// </summary>
@@ -21,5 +28,6 @@ namespace OrchardCore.ContentManagement
         {
             return serviceCollection.Configure<ContentOptions>(o => o.AddContentField<TContentField>());
         }
+
     }
 }

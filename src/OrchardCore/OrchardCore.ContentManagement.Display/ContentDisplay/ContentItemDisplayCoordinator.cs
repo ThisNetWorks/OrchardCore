@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
@@ -23,6 +25,8 @@ namespace OrchardCore.ContentManagement.Display
         private readonly IEnumerable<IContentPartDisplayDriver> _partDisplayDrivers;
         private readonly IContentDefinitionManager _contentDefinitionManager;
         private readonly ITypeActivatorFactory<ContentPart> _contentPartFactory;
+        private readonly ContentOptions _contentOptions;
+        private readonly IServiceProvider _serviceProvider;
 
         public ContentItemDisplayCoordinator(
             IContentDefinitionManager contentDefinitionManager,
@@ -30,6 +34,8 @@ namespace OrchardCore.ContentManagement.Display
             IEnumerable<IContentFieldDisplayDriver> fieldDisplayDrivers,
             IEnumerable<IContentPartDisplayDriver> partDisplayDrivers,
             ITypeActivatorFactory<ContentPart> contentPartFactory,
+            IOptions<ContentOptions> contentOptions,
+            IServiceProvider serviceProvider,
             ILogger<ContentItemDisplayCoordinator> logger)
         {
             _contentPartFactory = contentPartFactory;
@@ -37,6 +43,8 @@ namespace OrchardCore.ContentManagement.Display
             _displayDrivers = displayDrivers;
             _fieldDisplayDrivers = fieldDisplayDrivers;
             _partDisplayDrivers = partDisplayDrivers;
+            _serviceProvider = serviceProvider;
+            _contentOptions = contentOptions.Value;
             Logger = logger;
         }
 
@@ -77,8 +85,11 @@ namespace OrchardCore.ContentManagement.Display
 
                 if (part != null)
                 {
-                    foreach (var displayDriver in _partDisplayDrivers)
+                    var partOption = _contentOptions.ContentPartOptions.FirstOrDefault(x => x.Type.Name == partTypeName);
+
+                    if (partOption != null && partOption.DisplayDriver != null)
                     {
+                        IContentPartDisplayDriver displayDriver = (IContentPartDisplayDriver)partOption.DisplayDriver.Invoke(_serviceProvider);
                         try
                         {
                             var result = await displayDriver.BuildDisplayAsync(part, contentTypePartDefinition, context);
@@ -92,7 +103,24 @@ namespace OrchardCore.ContentManagement.Display
                             InvokeExtensions.HandleException(ex, Logger, displayDriver.GetType().Name, "BuildDisplayAsync");
                         }
                     }
-
+                    else
+                    {
+                        foreach (var displayDriver in _partDisplayDrivers)
+                        {
+                            try
+                            {
+                                var result = await displayDriver.BuildDisplayAsync(part, contentTypePartDefinition, context);
+                                if (result != null)
+                                {
+                                    await result.ApplyAsync(context);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                InvokeExtensions.HandleException(ex, Logger, displayDriver.GetType().Name, "BuildDisplayAsync");
+                            }
+                        }
+                    }
                     var tempContext = context;
 
                     // Create a custom ContentPart shape that will hold the fields for dynamic content part (not implicit parts)
